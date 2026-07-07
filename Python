@@ -1,0 +1,72 @@
+from datetime import date
+
+today = date.today()
+data_formatada = today.strftime("%d/%m/%Y")
+print(f"A data de hoje é: {data_formatada}")
+
+
+print("Sistema Iniciado")
+
+
+cliente = "João"
+saldo = 500
+print(cliente, "tem saldo de", saldo)
+
+
+capital = 1000
+taxa_mensal = 0.02
+meses = 6
+juros = capital * taxa_mensal * meses
+montante = capital + juros
+print("montante final:", montante)
+
+
+
+
+def format_currency_pt_br(value):
+    # Esta função formata um número como Real Brasileiro (R$) com separador de milhar e 2 casas decimais.
+    # Exemplo: 1000.50 será formatado como R$ 1.000,50
+    return f"R$ {value:,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.')
+
+# Definição dos parâmetros para o cálculo de Juros Simples
+capital = 50000  # Valor inicial investido ou emprestado
+taxa_mensal = .02  # Taxa de juros mensal (2% ao mês)
+meses = 6  # Período de tempo em meses
+
+# Cálculo dos Juros Simples (J = C * i * t)
+juros = capital * taxa_mensal * meses
+print(f"Cálculo dos Juros: J = C * i * t")
+print(f"J = {format_currency_pt_br(capital)} * {taxa_mensal} * {meses}")
+print(f"Juros: {format_currency_pt_br(juros)}")
+
+print("\n")
+# Cálculo do Montante (Montante = Capital + Juros)
+montante = capital + juros
+print(f"Cálculo do Montante: M = C + J")
+print(f"M = {format_currency_pt_br(capital)} + {format_currency_pt_br(juros)}")
+print(f"Montante final: {format_currency_pt_br(montante)}")
+
+
+
+
+
+idade = 5
+
+if idade >= 18:
+  print("conta aprovada")
+else:
+  print("requer responsável")
+
+
+
+
+renda = 3000
+parcela = 1000
+
+limite = 0.3 * renda
+
+if parcela > limite:
+  print ("Empréstimo NEGADO")
+else:
+  print ("Empréstimo APROVADO")
+
