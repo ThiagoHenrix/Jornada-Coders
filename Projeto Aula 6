@@ -1,0 +1,148 @@
+import random
+import pandas as pd
+from datetime import datetime
+
+# Classe que representa uma conta bancária
+class Conta:
+    def __init__(self, numero, titular, saldo):
+        self.numero = numero
+        self.titular = titular
+        self.saldo = saldo
+
+    # Método para realizar depósito
+    def deposito(self, valor):
+        self.saldo += valor
+
+    # Método para realizar saque
+    def saque(self, valor):
+        if valor <= self.saldo:
+            self.saldo -= valor
+        else:
+            print(f"Saque não autorizado. Conta {self.numero} sem saldo suficiente.")
+
+    # Método para consultar saldo
+    def consultar_saldo(self):
+        return self.saldo
+
+
+# Lista de nomes fictícios
+nomes = [
+    "Ana Souza", "Bruno Lima", "Carlos Mendes", "Daniela Rocha",
+    "Eduardo Alves", "Fernanda Costa", "Gabriel Martins", "Helena Dias",
+    "Igor Barbosa", "Juliana Castro", "Karen Oliveira", "Lucas Ferreira",
+    "Mariana Gomes", "Nelson Ribeiro", "Olivia Santos", "Paulo Henrique",
+    "Renata Moreira", "Samuel Araújo", "Tatiana Nunes", "Vanessa Melo"
+]
+
+# Lista onde as contas serão armazenadas
+contas = []
+
+# Geração de 20 contas fictícias
+for i in range(20):
+    numero = 1001 + i
+    titular = nomes[i]
+    saldo = random.randint(1000, 100000)
+
+    conta = Conta(numero, titular, saldo)
+    contas.append(conta)
+
+
+# Exibir base de contas criada
+print("BASE DE CONTAS GERADA")
+print("-" * 80)
+
+for conta in contas:
+    print(
+        f"Conta: {conta.numero} | "
+        f"Cliente: {conta.titular:<20} | "
+        f"Saldo Inicial: R$ {conta.saldo:>10,.2f}"
+    )
+
+
+# Simulação de movimentações: depósito ou saque
+print("\nMOVIMENTAÇÕES SIMULADAS")
+print("-" * 80)
+
+for conta in contas:
+    valor = random.randint(100, 5000)
+    operacao = random.choice(["Depósito", "Saque"])
+
+    if operacao == "Depósito":
+        conta.deposito(valor)
+    else:
+        conta.saque(valor)
+
+    print(
+        f"Conta: {conta.numero} | "
+        f"Operação: {operacao:<8} | "
+        f"Valor: R$ {valor:>8,.2f} | "
+        f"Novo Saldo: R$ {conta.saldo:>10,.2f}"
+    )
+
+
+# Regra de auditoria
+limite_auditoria = 50000
+id_alerta = 1
+
+# Lista que armazenará os e-mails de alerta
+emails_alerta = []
+
+print("\nANÁLISE DE AUDITORIA")
+print("-" * 80)
+print(f"Regra aplicada: identificar contas com saldo acima de R$ {limite_auditoria:,.2f}")
+print("-" * 80)
+
+
+# Verificação das contas e geração dos alertas
+for conta in contas:
+    if conta.consultar_saldo() > limite_auditoria:
+        
+        data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        codigo_alerta = f"ALT-{datetime.now().strftime('%Y%m%d')}-{id_alerta:04d}"
+
+        # Simulação do e-mail em formato de registro
+        email = {
+            "destinatario": "auditoria.ti@bancoficticio.com.br",
+            "assunto": "Alerta de Auditoria - Saldo Elevado",
+            "id_alerta": codigo_alerta,
+            "data_hora": data_hora,
+            "conta": conta.numero,
+            "cliente": conta.titular,
+            "saldo": conta.saldo,
+            "mensagem": "Conta com saldo acima de R$ 50.000,00. Recomenda-se análise pela Auditoria de TI."
+        }
+
+        # Adiciona o e-mail à lista de alertas
+        emails_alerta.append(email)
+
+        print(
+            f"Alerta gerado: {codigo_alerta} | "
+            f"Conta: {conta.numero} | "
+            f"Cliente: {conta.titular} | "
+            f"Saldo: R$ {conta.saldo:,.2f}"
+        )
+
+        id_alerta += 1
+
+
+# Criação do DataFrame com os e-mails enviados
+df_emails = pd.DataFrame(emails_alerta)
+
+
+# Exibição do DataFrame de e-mails
+print("\nDATAFRAME DOS E-MAILS DE ALERTA")
+print("-" * 80)
+
+if len(df_emails) > 0:
+    display(df_emails)
+else:
+    print("Nenhum alerta foi gerado. Não há e-mails para exibir.")
+
+
+# Resumo final da auditoria
+print("\nRESUMO FINAL DA AUDITORIA")
+print("-" * 80)
+print(f"Total de contas analisadas : {len(contas)}")
+print(f"Total de alertas gerados   : {len(df_emails)}")
+print(f"Limite utilizado na análise: R$ {limite_auditoria:,.2f}")
+print("-" * 80)
