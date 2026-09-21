@@ -1,0 +1,130 @@
+fila = ["Alice", "Bob", "Charlie"] 
+
+for nome in fila:
+    print(nome)
+
+
+
+
+
+import random
+
+def generate_cpf():
+    """Generates a plausible alphanumeric CPF (e.g., XXX.YYY.ZZZ-DD)."""
+    # Generate 9 random digits for the main part
+    digits = ''.join([str(random.randint(0, 9)) for _ in range(9)])
+    
+    # Calculate the first verifier digit
+    sum_val = 0
+    for i in range(9):
+        sum_val += int(digits[i]) * (10 - i)
+    v1 = (sum_val * 10) % 11
+    if v1 == 10:
+        v1 = 0
+    
+    # Append first verifier digit
+    digits += str(v1)
+    
+    # Calculate the second verifier digit
+    sum_val = 0
+    for i in range(10):
+        sum_val += int(digits[i]) * (11 - i)
+    v2 = (sum_val * 10) % 11
+    if v2 == 10:
+        v2 = 0
+        
+    # Append second verifier digit
+    digits += str(v2)
+    
+    # Format as XXX.YYY.ZZZ-DD
+    return f"{digits[0:3]}.{digits[3:6]}.{digits[6:9]}-{digits[9:11]}"
+
+
+first_names = [
+    "Ana", "Bruno", "Carla", "Daniel", "Eduarda", "Felipe", "Gabriela",
+    "Henrique", "Isabela", "João", "Larissa", "Marcelo", "Natalia", "Otavio",
+    "Patricia", "Rafael", "Sabrina", "Thiago", "Ursula", "Victor"
+]
+
+last_names = [
+    "Silva", "Santos", "Oliveira", "Souza", "Lima", "Pereira", "Ferreira",
+    "Almeida", "Costa", "Rodrigues", "Martins", "Carvalho", "Ribeiro", "Gomes",
+    "Dias", "Fernandes", "Gonçalves", "Mendes", "Nunes", "Rocha"
+]
+
+clientes = []
+
+for _ in range(20):
+    nome = random.choice(first_names)
+    sobrenome = random.choice(last_names)
+    # Ensure unique CPF for each customer, though unlikely to collide in small sample
+    cpf = generate_cpf()
+    renda = round(random.uniform(2000, 15000), 2)  # Renda entre 2000 e 15000
+    score_credito = random.randint(300, 900)  # Score de crédito entre 300 e 900
+
+    cliente = {
+        "cpf": cpf,
+        "nome": nome,
+        "sobrenome": sobrenome,
+        "renda": renda,
+        "score_credito": score_credito
+    }
+    clientes.append(cliente)
+
+# Display the generated list of clients
+for cliente in clientes:
+    print(cliente)
+
+
+
+
+
+
+
+
+
+import random
+
+nomes = [
+    "Ana Paula Souza", "Bruno Henrique Lima", "Carla Mendes Rocha",
+    "Daniel Oliveira", "Eduarda Alves", "Felipe Costa",
+    "Gabriela Freitas", "Henrique Matos", "Isabela Nogueira",
+    "João Pedro Silva", "Karina Barros", "Leonardo Vieira",
+    "Mariana Ribeiro", "Natália Castro", "Otávio Fernandes",
+    "Patrícia Gomes", "Rafael Teixeira", "Sabrina Martins",
+    "Thiago Duarte", "Vanessa Albuquerque"
+]
+
+clientes = []
+
+for nome in nomes:
+    cliente = {
+        "nome": nome,
+        "renda": round(random.uniform(2000, 15000), 2),
+        "score_credito": random.randint(500, 950)
+    }
+    clientes.append(cliente)
+
+print(clientes)
+
+
+
+
+
+
+
+
+
+
+for cliente in clientes:
+    if cliente["score_credito"] >= 600:
+        print(cliente["nome"], "- aprovado")
+    else:
+        print(cliente["nome"], "- em análise manual")
+
+
+
+
+
+
+
