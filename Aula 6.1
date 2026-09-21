@@ -1,0 +1,270 @@
+import random
+
+# Classe que representa uma conta bancária
+class Conta:
+    def __init__(self, numero, titular, saldo):
+        self.numero = numero
+        self.titular = titular
+        self.saldo = saldo
+
+    def deposito(self, valor):
+        self.saldo += valor
+
+    def saque(self, valor):
+        if valor <= self.saldo:
+            self.saldo -= valor
+        else:
+            print(f"Conta {self.numero}: saldo insuficiente.")
+
+# Lista de clientes fictícios
+nomes = [
+    "Ana", "Bruno", "Carlos", "Daniela", "Eduardo",
+    "Fernanda", "Gabriel", "Helena", "Igor", "Juliana"
+]
+
+# Lista que armazenará as contas
+contas = []
+
+# Geração automática das contas
+for i in range(1, 6):
+    numero = 1000 + i
+    titular = random.choice(nomes)
+    saldo = random.randint(1000, 5000)
+
+    conta = Conta(numero, titular, saldo)
+    contas.append(conta)
+
+# Exibe as contas criadas
+print("CONTAS CRIADAS")
+print("-" * 50)
+
+for conta in contas:
+    print(
+        f"Conta: {conta.numero} | "
+        f"Cliente: {conta.titular:<10} | "
+        f"Saldo Inicial: R$ {conta.saldo:,.2f}"
+    )
+
+# Realiza movimentações aleatórias
+print("\nMOVIMENTAÇÕES")
+print("-" * 50)
+
+for conta in contas:
+    valor = random.randint(100, 1000)
+
+    if random.choice([True, False]):
+        conta.deposito(valor)
+        operacao = "Depósito"
+    else:
+        conta.saque(valor)
+        operacao = "Saque"
+
+    print(
+        f"Conta: {conta.numero} | "
+        f"{operacao:<10} R$ {valor:>7,.2f} | "
+        f"Novo Saldo: R$ {conta.saldo:>8,.2f}"
+    )
+
+# Relatório final
+print("\nSALDOS FINAIS")
+print("-" * 50)
+
+for conta in contas:
+    print(
+        f"Conta: {conta.numero} | "
+        f"Cliente: {conta.titular:<10} | "
+        f"Saldo Final: R$ {conta.saldo:,.2f}"
+    )
+
+
+    import random
+
+# Classe Conta
+class Conta:
+    def __init__(self, numero, titular, saldo):
+        self.numero = numero
+        self.titular = titular
+        self.saldo = saldo
+
+# Lista de clientes fictícios
+nomes = [
+    "Ana", "Bruno", "Carlos", "Daniela", "Eduardo",
+    "Fernanda", "Gabriel", "Helena", "Igor", "Juliana",
+    "Karen", "Lucas", "Mariana", "Nelson", "Olivia",
+    "Paulo", "Renata", "Samuel", "Tatiana", "Vanessa"
+]
+
+# Lista de contas
+contas = []
+
+# Geração de 20 contas
+for i in range(20):
+    numero = 1001 + i
+    titular = nomes[i]
+    saldo = random.randint(1000, 100000)
+
+    conta = Conta(numero, titular, saldo)
+    contas.append(conta)
+
+# Exibição das contas
+print("BASE DE CONTAS")
+print("-" * 60)
+
+for conta in contas:
+    print(
+        f"Conta: {conta.numero} | "
+        f"Cliente: {conta.titular:<10} | "
+        f"Saldo: R$ {conta.saldo:>10,.2f}"
+    )
+
+# Auditoria
+print("\nALERTAS DE AUDITORIA")
+print("-" * 60)
+
+qtd_alertas = 0
+
+for conta in contas:
+    if conta.saldo > 50000:
+        qtd_alertas += 1
+        print(
+            f"⚠ ALERTA: Conta {conta.numero} "
+            f"({conta.titular}) possui saldo de "
+            f"R$ {conta.saldo:,.2f}"
+        )
+
+print("-" * 60)
+print(f"Total de alertas encontrados: {qtd_alertas}")
+
+
+import random
+from datetime import datetime
+
+# Classe que representa uma conta bancária
+class Conta:
+    def __init__(self, numero, titular, saldo):
+        self.numero = numero
+        self.titular = titular
+        self.saldo = saldo
+
+    # Função para realizar depósito
+    def deposito(self, valor):
+        self.saldo += valor
+
+    # Função para realizar saque
+    def saque(self, valor):
+        if valor <= self.saldo:
+            self.saldo -= valor
+        else:
+            print(f"Saque não autorizado. Conta {self.numero} sem saldo suficiente.")
+
+    # Função para consultar saldo
+    def consultar_saldo(self):
+        return self.saldo
+
+    # Função para simular envio de e-mail de alerta
+    def enviar_alerta_email(self, id_alerta):
+        data_hora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        codigo_alerta = f"ALT-{datetime.now().strftime('%Y%m%d')}-{id_alerta:04d}"
+
+        print("\n" + "=" * 70)
+        print("E-MAIL AUTOMÁTICO DE AUDITORIA")
+        print("=" * 70)
+        print("Para: auditoria.ti@bancoficticio.com.br")
+        print("Assunto: Alerta de Auditoria - Saldo Elevado")
+        print("-" * 70)
+        print(f"ID do Alerta : {codigo_alerta}")
+        print(f"Data/Hora    : {data_hora}")
+        print(f"Conta        : {self.numero}")
+        print(f"Cliente      : {self.titular}")
+        print(f"Saldo        : R$ {self.saldo:,.2f}")
+        print("-" * 70)
+        print("Mensagem:")
+        print("Foi identificada uma conta com saldo acima de R$ 50.000,00.")
+        print("Recomenda-se análise pela equipe de Auditoria de TI.")
+        print("=" * 70)
+
+
+# Lista de nomes fictícios
+nomes = [
+    "Ana Souza", "Bruno Lima", "Carlos Mendes", "Daniela Rocha",
+    "Eduardo Alves", "Fernanda Costa", "Gabriel Martins", "Helena Dias",
+    "Igor Barbosa", "Juliana Castro", "Karen Oliveira", "Lucas Ferreira",
+    "Mariana Gomes", "Nelson Ribeiro", "Olivia Santos", "Paulo Henrique",
+    "Renata Moreira", "Samuel Araújo", "Tatiana Nunes", "Vanessa Melo"
+]
+
+# Lista onde as contas serão armazenadas
+contas = []
+
+# Geração de 20 contas fictícias
+for i in range(20):
+    numero = 1001 + i
+    titular = nomes[i]
+    saldo = random.randint(1000, 100000)
+
+    conta = Conta(numero, titular, saldo)
+    contas.append(conta)
+
+
+# Exibição da base de contas criada
+print("BASE DE CONTAS GERADA")
+print("-" * 70)
+
+for conta in contas:
+    print(
+        f"Conta: {conta.numero} | "
+        f"Cliente: {conta.titular:<20} | "
+        f"Saldo: R$ {conta.saldo:>10,.2f}"
+    )
+
+
+# Simulação de movimentações: depósito ou saque
+print("\nMOVIMENTAÇÕES SIMULADAS")
+print("-" * 70)
+
+for conta in contas:
+    valor = random.randint(100, 5000)
+    operacao = random.choice(["Depósito", "Saque"])
+
+    if operacao == "Depósito":
+        conta.deposito(valor)
+    else:
+        conta.saque(valor)
+
+    print(
+        f"Conta: {conta.numero} | "
+        f"Operação: {operacao:<8} | "
+        f"Valor: R$ {valor:>8,.2f} | "
+        f"Novo Saldo: R$ {conta.saldo:>10,.2f}"
+    )
+
+
+# Regra de auditoria
+limite_auditoria = 50000
+id_alerta = 1
+quantidade_alertas = 0
+
+print("\nANÁLISE DE AUDITORIA")
+print("-" * 70)
+print(f"Regra aplicada: identificar contas com saldo acima de R$ {limite_auditoria:,.2f}")
+print("-" * 70)
+
+for conta in contas:
+    if conta.consultar_saldo() > limite_auditoria:
+        quantidade_alertas += 1
+
+        # Simula envio de e-mail para cada alerta identificado
+        conta.enviar_alerta_email(id_alerta)
+
+        id_alerta += 1
+
+
+# Resumo final da auditoria
+print("\nRESUMO FINAL DA AUDITORIA")
+print("-" * 70)
+print(f"Total de contas analisadas : {len(contas)}")
+print(f"Total de alertas gerados   : {quantidade_alertas}")
+print(f"Limite utilizado na análise: R$ {limite_auditoria:,.2f}")
+print("-" * 70)
+
+
